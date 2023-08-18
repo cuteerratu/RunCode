@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Code Runner</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- 引入 Bootstrap 样式 -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
   <script defer src="https://pyscript.net/latest/pyscript.js"></script>
 </head>
@@ -41,10 +42,10 @@
       
       const pyRepl = document.getElementById('pyRepl');
       pyRepl.innerHTML = '';
-      
-      const script = document.createElement('script');
-      script.textContent = pythonCode;
-      document.body.appendChild(script);
+
+      const pyScript = document.createElement('py-script');
+      pyScript.textContent = pythonCode;
+      document.body.appendChild(pyScript);
     });
   </script>
 </body>
