@@ -1,20 +1,51 @@
-<html>
-  <head>
-    <title>Code Runner</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-  </head>
-  <body>
-
-    <py-config>
-      packages = ["requests"]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Runner</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="mb-4">Python Code Runner</h1>
+    
+    <div class="form-group">
+      <label for="pythonCode">Python Code:</label>
+      <textarea class="form-control" id="pythonCode" rows="6"></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label for="pythonLibs">Python Libraries (comma-separated):</label>
+      <input type="text" class="form-control" id="pythonLibs">
+    </div>
+    
+    <button class="btn btn-primary mb-4" id="runButton">Run Code</button>
+    
+    <py-config id="pyConfig">
+      packages = []
     </py-config>
-
-    <py-script src="./main.py"></py-script>
-
-    <py-repl>
-      执行结果在下面
-    </py-repl>
-  </body>
+    
+    <py-repl id="pyRepl">Execution results will appear here</py-repl>
+  </div>
+  
+  <script>
+    document.getElementById('runButton').addEventListener('click', function() {
+      const pythonCode = document.getElementById('pythonCode').value;
+      const pythonLibs = document.getElementById('pythonLibs').value.split(',').map(lib => lib.trim());
+      
+      const pyConfig = document.getElementById('pyConfig');
+      pyConfig.innerHTML = 'packages = ' + JSON.stringify(pythonLibs);
+      
+      const pyRepl = document.getElementById('pyRepl');
+      pyRepl.innerHTML = '';
+      
+      const script = document.createElement('script');
+      script.textContent = pythonCode;
+      document.body.appendChild(script);
+    });
+  </script>
+</body>
 </html>
